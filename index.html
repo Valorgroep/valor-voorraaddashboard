@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#173457">
+    <title>VALOR Voorraad</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <div class="brand-mark">V</div>
+        <div>
+            <h1>VALOR Afvaltransport</h1>
+            <p>Digitale voorraad</p>
+        </div>
+    </div>
+
+    <div class="view-switcher">
+        <button class="view-btn active" data-view="terrain">Terrein</button>
+        <button class="view-btn" data-view="planner">Planning</button>
+    </div>
+</header>
+
+<main id="app"></main>
+
+<div id="toast" class="toast"></div>
+
+<div id="confirmModal" class="modal hidden">
+    <div class="modal-card small">
+        <button class="modal-close" data-close-modal>×</button>
+        <div class="modal-icon warning">!</div>
+        <h2>Voorraadlijst bestaat al</h2>
+        <p id="confirmText">Er is al een voorraadlijst voor vandaag.</p>
+        <div class="modal-actions">
+            <button class="btn secondary" data-close-modal>Annuleren</button>
+            <button class="btn primary" id="editExistingBtn">Bestaande lijst bewerken</button>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
