@@ -664,64 +664,46 @@ function renderForm() {
    AFVALSTROOM INVOER
 ========================================================= */
 
-function renderBulkStream(
-    stream,
-    value = {}
-) {
 
+function renderBulkStream(stream, value = {}) {
     return `
+        <div class="stream-row" data-stream="${stream.id}">
 
-        <div
-            class="stream-row"
-            data-stream="${stream.id}"
-        >
+            <button
+                type="button"
+                class="stream-toggle"
+                aria-expanded="false"
+                aria-label="Voorraad openen: ${stream.name}"
+            >
+                <span class="stream-toggle-info">
+                    <span class="stream-name">${stream.name}</span>
+                    <span class="stream-type">Voorraad op terrein</span>
+                </span>
 
-
-            <div class="stream-main">
-
-
-                <div>
-
-                    <div class="stream-name">
-
-                        ${stream.name}
-
-                    </div>
-
-
-                    <span class="stream-type">
-
-                        Voorraad op terrein
-
+                <span class="stream-toggle-right">
+                    <span class="stream-preview">
+                        ${Number(value.floor || 0)} m³
+                        ·
+                        ${Number(value.full3040 || 0)} bakken
                     </span>
+                    <span class="stream-chevron" aria-hidden="true">⌄</span>
+                </span>
+            </button>
 
-                </div>
-
-
+            <div class="stream-fields-panel">
                 <div class="fields">
 
-
-                    <!-- OP VLOER -->
-
                     <div class="field-group">
-
-                        <label>
-                            Op vloer
-                        </label>
-
+                        <label>Op vloer</label>
 
                         <div class="number-control">
-
-
                             <button
+                                type="button"
                                 class="step minus"
                                 data-id="${stream.id}"
-                                data-field="floor">
-
-                                −
-
-                            </button>
-
+                                data-field="floor"
+                                aria-label="Minder voorraad op vloer"
+                            >−</button>
 
                             <input
                                 class="number-input stream-input"
@@ -733,48 +715,29 @@ function renderBulkStream(
                                 value="${Number(value.floor || 0)}"
                             >
 
-
                             <button
+                                type="button"
                                 class="step plus"
                                 data-id="${stream.id}"
-                                data-field="floor">
-
-                                +
-
-                            </button>
-
-
+                                data-field="floor"
+                                aria-label="Meer voorraad op vloer"
+                            >+</button>
                         </div>
 
-
-                        <span class="unit">
-                            m³
-                        </span>
-
+                        <span class="unit">m³</span>
                     </div>
 
-
-                    <!-- 30/40 M3 VOL -->
-
                     <div class="field-group">
-
-                        <label>
-                            30/40 m³ vol
-                        </label>
-
+                        <label>30/40 m³ vol</label>
 
                         <div class="number-control">
-
-
                             <button
+                                type="button"
                                 class="step minus"
                                 data-id="${stream.id}"
-                                data-field="full3040">
-
-                                −
-
-                            </button>
-
+                                data-field="full3040"
+                                aria-label="Minder volle bakken"
+                            >−</button>
 
                             <input
                                 class="number-input stream-input"
@@ -786,37 +749,24 @@ function renderBulkStream(
                                 value="${Number(value.full3040 || 0)}"
                             >
 
-
                             <button
+                                type="button"
                                 class="step plus"
                                 data-id="${stream.id}"
-                                data-field="full3040">
-
-                                +
-
-                            </button>
-
-
+                                data-field="full3040"
+                                aria-label="Meer volle bakken"
+                            >+</button>
                         </div>
 
-
-                        <span class="unit">
-                            stuks
-                        </span>
-
+                        <span class="unit">stuks</span>
                     </div>
 
-
                 </div>
-
-
             </div>
-
-
         </div>
-
     `;
 }
+
 
 
 /* =========================================================
@@ -1638,6 +1588,18 @@ function bindEvents() {
             };
 
         });
+
+        
+    /* UITKLAPPEN VOORRAADSTROMEN */
+
+    document.querySelectorAll(".stream-toggle").forEach(btn => {
+        btn.onclick = () => {
+            const row = btn.closest(".stream-row");
+            const isOpen = row.classList.toggle("is-open");
+
+            btn.setAttribute("aria-expanded", String(isOpen));
+        };
+    });
 
 
     /* PLUS */

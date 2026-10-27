@@ -1305,3 +1305,189 @@ select:focus {
         flex-direction: column;
     }
 }
+
+
+/* =========================================
+   RESPONSIEVE VOORRAADSTROMEN
+   VALOR - mobiel uitklapbaar
+   ========================================= */
+
+.stream-row {
+    padding: 0;
+    overflow: hidden;
+    background: #FFFFFF;
+    transition: border-color 0.2s ease;
+}
+
+.stream-toggle {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 15px;
+    border: 0;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+}
+
+.stream-toggle-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.stream-toggle .stream-name {
+    color: var(--text);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.stream-toggle-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.stream-preview {
+    color: #000000;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stream-chevron {
+    display: none;
+    color: var(--green);
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.stream-fields-panel {
+    padding: 0 15px 15px;
+}
+
+.stream-fields-panel .fields {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Laptop: alles zichtbaar, compact weergegeven */
+
+@media (min-width: 651px) {
+    .stream-row {
+        padding: 0;
+    }
+
+    .stream-toggle {
+        cursor: default;
+        padding-bottom: 5px;
+    }
+
+    .stream-toggle:hover {
+        background: transparent;
+    }
+
+    .stream-fields-panel {
+        padding-top: 0;
+    }
+}
+
+/* Telefoon: standaard dichtgeklapt */
+
+@media (max-width: 650px) {
+    .stream-list {
+        gap: 8px;
+    }
+
+    .stream-row {
+        border-radius: 12px;
+    }
+
+    .stream-toggle {
+        min-height: 66px;
+        padding: 13px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .stream-toggle:focus-visible {
+        outline: 2px solid var(--green);
+        outline-offset: -3px;
+    }
+
+    .stream-chevron {
+        display: inline-block;
+    }
+
+    .stream-fields-panel {
+        display: none;
+        padding: 0 13px 14px;
+    }
+
+    .stream-row.is-open .stream-fields-panel {
+        display: block;
+    }
+
+    .stream-row.is-open .stream-chevron {
+        transform: rotate(180deg);
+    }
+
+    .stream-row.is-open {
+        border-color: var(--green);
+        box-shadow: 0 3px 12px rgba(18, 56, 45, 0.08);
+    }
+
+    .stream-row.is-open .stream-toggle {
+        padding-bottom: 12px;
+    }
+
+    .stream-fields-panel .fields {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 13px;
+    }
+
+    .stream-fields-panel .field-group {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .stream-fields-panel .field-group label {
+        font-size: 13px;
+    }
+
+    .stream-fields-panel .number-control {
+        gap: 5px;
+    }
+
+    .stream-fields-panel .step {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    .stream-fields-panel .number-input {
+        width: 60px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .stream-fields-panel .unit {
+        font-size: 12px;
+        min-width: 32px;
+    }
+
+    .stream-preview {
+        font-size: 11px;
+    }
+}
